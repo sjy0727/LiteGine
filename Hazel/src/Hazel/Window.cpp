@@ -17,9 +17,9 @@ namespace Hazel
     }
 
     // FIXME: 必须在这里实现否则链接时无法找到函数实现
-    Window::~Window() {}
+    // Window::~Window() {}
     // void Window::SetEventCallback(const Window::EventCallbackFn& callback) {}
     // void Window::SetVSync(bool enabled) {}
-    // bool Window::isVSync() const { return true; }
+    // bool Window::IsVSync() const { return true; }
 
 } // namespace Hazel

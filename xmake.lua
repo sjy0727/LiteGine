@@ -8,6 +8,8 @@ add_defines("HZ_BUILD_SHARED_LIB")
 add_defines("HZ_ENABLE_ASSERTS")
 -- 设置不显示GLFW warning
 add_defines("GL_SILENCE_DEPRECATION")
+-- 设置包含GLFW时不再包含OpenGL头文件
+add_defines("GLFW_INCLUDE_NONE")
 
 -- 添加全局包含路径
 -- spdlog
@@ -17,13 +19,21 @@ add_includedirs("Hazel/vendor/spdlog/include")
 -- add_includedirs("Hazel/vendor/glfw/include")
 add_includedirs("Hazel/vendor/chernoGLFW")
 
+-- glad
+add_includedirs("Hazel/vendor/Glad/include")
+includes("Hazel/vendor/Glad")
+
+-- ImGui
+add_includedirs("Hazel/vendor/ImGui/include")
+includes("Hazel/vendor/ImGui")
+
 -- 添加子项目
 -- 添加子目录下的xmake项目
 -- includes("Hazel/vendor/glfw")
 -- 添加子目录下的xmake项目
 -- add_subdirs("Hazel/vendor/glfw")
 -- 下载需求的包到~/.xmake中
--- add_requires("glfw")
+-- add_requires("glfw 3.3.8", {alias = "glfw"})
 
 target("Hazel")
     -- 预编译头文件
@@ -38,8 +48,17 @@ target("Hazel")
     add_includedirs("Hazel/src")
     add_includedirs("Hazel/src/Hazel")
 
+    -- 添加Glad依赖
+    add_deps("Glad")
+    -- 添加Imgui依赖
+    add_includedirs("Hazel/vendor/ImGui/include/ImGui")
+    add_deps("ImGui")
+
+    add_includedirs("Hazel/vendor/spdlog/include")
+
     -- 链接下载到~/.xmake的静态库
     -- add_packages("glfw")
+    -- add_deps("glfw")
 
     -- 链接本地编译项目的静态库
     -- add_deps("GLFW")

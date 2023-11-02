@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GLFW/glfw3.h"
 #include "Hazel/Window.h"
+#include "GLFW/glfw3.h"
 
 namespace Hazel
 {
@@ -28,8 +28,8 @@ namespace Hazel
 
     public:
         MacWindow(const WindowProps& props);
-        // FIXME:析构函数不继承virtual
-        ~MacWindow() override;
+        // FIXME:析构函数不继承virtual, ~MacWindow() override可用
+        virtual ~MacWindow();
 
         void OnUpdate() override;
 
@@ -39,6 +39,6 @@ namespace Hazel
         // Window attributes
         inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; };
         void        SetVSync(bool enabled) override;
-        bool        isVSync() const override;
+        bool        IsVSync() const override;
     };
 } // namespace Hazel

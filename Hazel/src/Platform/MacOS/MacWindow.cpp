@@ -1,8 +1,11 @@
+#include "hzpch.h"
 #include "MacWindow.h"
-#include "Events/ApplicationEvent.h"
-#include "Events/KeyEvent.h"
-#include "Events/MouseEvent.h"
-#include "Log.h"
+
+#include "Hazel/Events/ApplicationEvent.h"
+#include "Hazel/Events/KeyEvent.h"
+#include "Hazel/Events/MouseEvent.h"
+
+#include <glad/glad.h>
 
 namespace Hazel
 {
@@ -15,6 +18,10 @@ namespace Hazel
 
     // FIXME: 链接动态库无法找到Window.h的原型实现
     //  Window* Window::Create(const WindowProps& props) { return new MacWindow(props); }
+
+	MacWindow::MacWindow(const WindowProps& props) { Init(props); }
+
+    MacWindow::~MacWindow() { Shutdown(); }
 
     void MacWindow::Init(const WindowProps& props)
     {
@@ -36,11 +43,12 @@ namespace Hazel
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
         glfwMakeContextCurrent(m_Window);
-        glfwSetWindowUserPointer(m_Window, &m_Data);
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		HZ_CORE_ASSERT(status, "Failed to initialize Glad!");
+		glfwSetWindowUserPointer(m_Window, &m_Data);
         SetVSync(true);
 
         // 设置 GLFW 回调函数
-        // Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 		{
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
@@ -123,11 +131,9 @@ namespace Hazel
 		});
     }
 
-    void MacWindow::Shutdown() { glfwDestroyWindow(m_Window); }
 
-    MacWindow::MacWindow(const WindowProps& props) { Init(props); }
 
-    MacWindow::~MacWindow() { Shutdown(); }
+	void MacWindow::Shutdown() { glfwDestroyWindow(m_Window); }
 
     void MacWindow::OnUpdate()
     {
@@ -141,6 +147,6 @@ namespace Hazel
         m_Data.Vsync = enabled;
     }
 
-    bool MacWindow::isVSync() const { return m_Data.Vsync; }
+    bool MacWindow::IsVSync() const { return m_Data.Vsync; }
 
 } // namespace Hazel
