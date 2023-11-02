@@ -2,8 +2,9 @@
 
 #include "Core.h"
 
-#include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
+#include "Events/Event.h"
+#include "LayerStack.h"
 #include "Window.h"
 
 namespace Hazel
@@ -13,7 +14,9 @@ namespace Hazel
     private:
         std::unique_ptr<Window> m_Window;
         bool                    m_Running = true;
-        bool OnWindowClose(WindowCloseEvent & e);
+        LayerStack              m_LayerStack;
+        bool                    OnWindowClose(WindowCloseEvent& e);
+
     public:
         Application();
         ~Application();
@@ -21,6 +24,9 @@ namespace Hazel
         void Run();
 
         void OnEvent(Event& e);
+
+        void PushLayer(Layer* layer);
+        void PushOverlay(Layer* overlay);
     };
 
     // 在客户端(Sandbox)中定义

@@ -2,7 +2,7 @@
 #include "Events/ApplicationEvent.h"
 #include "Events/KeyEvent.h"
 #include "Events/MouseEvent.h"
-#include "log.h"
+#include "Log.h"
 
 namespace Hazel
 {
