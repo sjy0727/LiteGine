@@ -10,6 +10,8 @@ add_defines("HZ_ENABLE_ASSERTS")
 add_defines("GL_SILENCE_DEPRECATION")
 -- 设置包含GLFW时不再包含OpenGL头文件
 add_defines("GLFW_INCLUDE_NONE")
+-- 禁止传统IMGUI按键
+-- add_defines("IMGUI_DISABLE_OBSOLETE_KEYIO")
 
 -- 添加全局包含路径
 -- spdlog

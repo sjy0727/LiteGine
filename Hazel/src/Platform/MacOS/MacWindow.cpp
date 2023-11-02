@@ -5,6 +5,7 @@
 #include "Hazel/Events/KeyEvent.h"
 #include "Hazel/Events/MouseEvent.h"
 
+// #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
 namespace Hazel
@@ -39,6 +40,11 @@ namespace Hazel
             glfwSetErrorCallback(GLFWErrorCallback);
             s_GLFWInitialized = true;
         }
+
+		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 3.2+ only
+    	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);           // Required on Mac
 
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
 
