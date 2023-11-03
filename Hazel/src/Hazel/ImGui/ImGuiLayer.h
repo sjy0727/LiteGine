@@ -19,7 +19,7 @@ namespace Hazel
         bool OnMouseScrolledEvent(MouseScrolledEvent& e);
 
         bool OnKeyPressedEvent(KeyPressedEvent& e);
-        // bool OnKeyTypedEvent(KeyTypedEvent& e);
+        bool OnKeyTypedEvent(KeyTypedEvent& e);
         bool OnKeyReleasedEvent(KeyReleasedEvent& e);
 
         bool OnWindowResizeEvent(WindowResizeEvent& e);

@@ -87,7 +87,12 @@ namespace Hazel
         ImGui_ImplOpenGL3_Init(glsl_version);
     }
 
-    void ImGuiLayer::OnDetach() {}
+    void ImGuiLayer::OnDetach() {
+        // Cleanup
+        ImGui_ImplOpenGL3_Shutdown();
+        ImGui_ImplGlfw_Shutdown();
+        ImGui::DestroyContext();
+    }
 
     void ImGuiLayer::OnUpdate()
     {
@@ -135,7 +140,7 @@ namespace Hazel
         dispatcher.Dispatch<MouseScrolledEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnMouseScrolledEvent));
 
         dispatcher.Dispatch<KeyPressedEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnKeyPressedEvent));
-        // dispatcher.Dispatch<KeyTypedEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
+        dispatcher.Dispatch<KeyTypedEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnKeyTypedEvent));
         dispatcher.Dispatch<KeyReleasedEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnKeyReleasedEvent));
 
         dispatcher.Dispatch<WindowResizeEvent>(HZ_BIND_EVENT_FN(ImGuiLayer::OnWindowResizeEvent));
@@ -177,10 +182,9 @@ namespace Hazel
     bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
     {
         ImGuiIO& io                 = ImGui::GetIO();
-
+        // extern ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int key);
         // ImGuiKey keycode = e.GetKeyCode();
-        
-        // io.AddKeyEvent(e.GetKeyCode(), true);
+        // io.AddKeyEvent(ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode()), true);
         io.KeysDown[e.GetKeyCode()] = true;
 
         // io.AddKeyEvent(ImGuiKey key, bool down);
@@ -197,6 +201,14 @@ namespace Hazel
         // io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
         // io.KeyAlt   = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
         // io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+        return false;
+    }
+
+    bool ImGuiLayer::OnKeyTypedEvent(KeyTypedEvent& e){
+        ImGuiIO& io = ImGui::GetIO();
+        int keycode = e.GetKeyCode();
+        io.AddInputCharacter(keycode);
+
         return false;
     }
 

@@ -56,7 +56,7 @@ target("Hazel")
     add_includedirs("Hazel/vendor/ImGui/include/ImGui")
     add_deps("ImGui")
 
-    add_includedirs("Hazel/vendor/spdlog/include")
+    -- add_includedirs("Hazel/vendor/spdlog/include")
 
     -- 链接下载到~/.xmake的静态库
     -- add_packages("glfw")
