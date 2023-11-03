@@ -29,6 +29,10 @@ includes("Hazel/vendor/Glad")
 add_includedirs("Hazel/vendor/ImGui/include")
 includes("Hazel/vendor/ImGui")
 
+
+add_includedirs("Hazel/src")
+add_includedirs("Hazel/src/Hazel")
+
 -- 添加子项目
 -- 添加子目录下的xmake项目
 -- includes("Hazel/vendor/glfw")
@@ -47,8 +51,8 @@ target("Hazel")
     -- 递归编译文件夹下面的所有cpp文件
     add_files("Hazel/src/**.cpp")
     
-    add_includedirs("Hazel/src")
-    add_includedirs("Hazel/src/Hazel")
+    -- add_includedirs("Hazel/src")
+    -- add_includedirs("Hazel/src/Hazel")
 
     -- 添加Glad依赖
     add_deps("Glad")

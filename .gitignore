@@ -10,3 +10,6 @@ build/
 
 # sourcetrail project
 sourcetrail/
+
+#  OpenGL
+OpenGL/

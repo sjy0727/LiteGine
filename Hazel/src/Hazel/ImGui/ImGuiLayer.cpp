@@ -7,9 +7,6 @@
 #include "ImGui/imgui_impl_glfw.h"
 #include "ImGui/imgui_impl_opengl3.h"
 
-// FIXME: 临时添加
-// #include "imgui/imgui_impl_glfw.h"
-
 // FIXME: 暂时存放
 #include "GLFW/glfw3.h"
 #include "glad/glad.h"
@@ -30,8 +27,8 @@ namespace Hazel
 
         ImGuiIO& io = ImGui::GetIO();
         (void)io;
-        io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-        io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+        // io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
+        // io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
         io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
@@ -39,10 +36,6 @@ namespace Hazel
         io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
         // BUG:addtest
-        // io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-        // io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-        // io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-        // io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;
 
         // TODO: 最终使用Hazel 键码 包含glfw3.h
         // io.KeyMap[ImGuiKey_Tab] = GLFW_KEY_TAB;
@@ -80,7 +73,6 @@ namespace Hazel
             style.Colors[ImGuiCol_WindowBg].w = 1.0f;
         }
 
-        // extern Application* Application::s_Instance;
         GLFWwindow* backup_current_context = glfwGetCurrentContext();
         ImGui_ImplGlfw_InitForOpenGL(backup_current_context, true);
         const char* glsl_version = "#version 410";
@@ -181,21 +173,22 @@ namespace Hazel
 
     bool ImGuiLayer::OnKeyPressedEvent(KeyPressedEvent& e)
     {
-        ImGuiIO& io                 = ImGui::GetIO();
+        // HZ_TRACE("{0}", e);
+        // ImGuiIO& io                 = ImGui::GetIO();
         // extern ImGuiKey ImGui_ImplGlfw_KeyToImGuiKey(int key);
         // ImGuiKey keycode = e.GetKeyCode();
         // io.AddKeyEvent(ImGui_ImplGlfw_KeyToImGuiKey(e.GetKeyCode()), true);
-        io.KeysDown[e.GetKeyCode()] = true;
+        // io.KeysDown[e.GetKeyCode()] = true;
 
         // io.AddKeyEvent(ImGuiKey key, bool down);
         // io.AddKeyEvent(ImGuiKey key, bool down);
         // io.AddKeyEvent(ImGuiKey key, bool down);
         // io.AddKeyEvent(ImGuiKey key, bool down);
 
-        io.KeyCtrl  = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
-        io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
-        io.KeyAlt   = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
-        io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
+        // io.KeyCtrl  = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
+        // io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
+        // io.KeyAlt   = io.KeysDown[GLFW_KEY_LEFT_ALT] || io.KeysDown[GLFW_KEY_RIGHT_ALT];
+        // io.KeySuper = io.KeysDown[GLFW_KEY_LEFT_SUPER] || io.KeysDown[GLFW_KEY_RIGHT_SUPER];
 
         // io.KeyCtrl  = io.KeysDown[GLFW_KEY_LEFT_CONTROL] || io.KeysDown[GLFW_KEY_RIGHT_CONTROL];
         // io.KeyShift = io.KeysDown[GLFW_KEY_LEFT_SHIFT] || io.KeysDown[GLFW_KEY_RIGHT_SHIFT];
