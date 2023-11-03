@@ -17,6 +17,12 @@
         #elif defined(_WIN32)
             #define HAZEL_API __declspec(dllexport)
         #endif
+    #else
+        #if defined(__APPLE__)
+            #define HAZEL_API
+        #elif defined(_WIN32)
+            #define HAZEL_API __declspec(dllimport)
+        #endif
     #endif
 #endif
 
